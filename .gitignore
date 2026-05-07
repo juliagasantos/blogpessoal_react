@@ -1,10 +1,3 @@
-# Dependências
-node_modules/
-
-# Build
-dist/
-build/
-
 # Logs
 logs
 *.log
@@ -12,42 +5,20 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
-# Arquivos de ambiente
-.env
-.env.local
-.env.*.local
+node_modules
+dist
+dist-ssr
+*.local
 
-# Sistema operacional
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-Thumbs.db
-
-# IDE / Editor
-.vscode/
-.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-
-# Cache
-.cache/
-.parcel-cache/
-.eslintcache
-
-# Vite
-.vite/
-
-# TypeScript
-*.tsbuildinfo
-
-# Coverage (testes)
-coverage/
-
-# Arquivos temporários
-*.tmp
-*.temp
-
-# Outros
-*.pid
-*.seedx
+*.sw?
