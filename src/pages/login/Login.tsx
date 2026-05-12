@@ -1,20 +1,12 @@
-import { useState, type ChangeEvent, type FormEvent } from "react"
+import { useContext, useState, type ChangeEvent, type FormEvent } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { login } from "../../services/Service"
-import type UsuarioLogin from "../../models/UsuarioLogin"
+import { AuthContext } from "../../contexts/AuthContext"
 
 function Login() {
 
     const navigate = useNavigate()
 
-    const [dados, setDados] = useState<UsuarioLogin>({
-        id: 0,
-        nome: "",
-        usuario: "",
-        senha: "",
-        foto: "",
-        token: ""
-    })
+    const { handleLogin } = useContext(AuthContext)
 
     const [loginDados, setLoginDados] = useState({
         usuario: "",
@@ -32,32 +24,32 @@ function Login() {
         e.preventDefault()
 
         try {
-            const resposta = await login("/usuarios/logar", loginDados)
 
-            setDados(resposta)
+            await handleLogin(loginDados as any)
 
             alert("Login realizado com sucesso!")
-
-            // aqui você pode salvar token se quiser:
-            // localStorage.setItem("token", resposta.token)
 
             navigate("/home")
 
         } catch (error) {
+
             alert("Usuário ou senha inválidos!")
+
             console.log(error)
         }
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold ">
+        <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold">
 
             <form
                 onSubmit={logar}
                 className="flex justify-center items-center flex-col w-1/2 gap-4"
             >
 
-                <h2 className="text-slate-900 text-5xl">Entrar</h2>
+                <h2 className="text-slate-900 text-5xl">
+                    Entrar
+                </h2>
 
                 <input
                     type="text"
@@ -88,7 +80,10 @@ function Login() {
 
                 <p>
                     Ainda não tem uma conta?{" "}
-                    <Link to="/cadastro" className="text-indigo-800 hover:underline">
+                    <Link
+                        to="/cadastro"
+                        className="text-indigo-800 hover:underline"
+                    >
                         Cadastre-se
                     </Link>
                 </p>
